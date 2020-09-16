@@ -9,6 +9,7 @@ import "fmt"
 **/
 
 type ShortRoad struct {
+	Id             int    `json:"id"`
 	TTiId          int    `json:"tti_id"`
 	TTIName        string `json:"tti_name"`
 	StartLongitude string `json:"start_longitude"`
@@ -17,12 +18,12 @@ type ShortRoad struct {
 	StopLatitude   string `json:"stop_latitude"`
 }
 
-func (road ShortRoad) String() string{
-	return fmt.Sprintf("TTIID: %d\n" +
-		"TTINAME: %s\n" +
-		"StartLongitude: %s\n" +
-		"StartLatitude: %s\n" +
-		"StopLongitude: %s\n" +
+func (road ShortRoad) String() string {
+	return fmt.Sprintf("TTIID: %d\n"+
+		"TTINAME: %s\n"+
+		"StartLongitude: %s\n"+
+		"StartLatitude: %s\n"+
+		"StopLongitude: %s\n"+
 		"StopLatitude: %s\n",
 		road.TTiId, road.TTIName,
 		road.StartLongitude, road.StartLatitude,
