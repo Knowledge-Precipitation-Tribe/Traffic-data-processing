@@ -36,18 +36,18 @@ func easyjsonC332dce6DecodeTrafficDataProcessingModel(in *jlexer.Lexer, out *Sho
 			continue
 		}
 		switch key {
-		case "id":
-			out.Id = int(in.Int())
-		case "tti_id":
-			out.TTiId = int(in.Int())
-		case "tti_name":
-			out.TTIName = string(in.String())
-		case "start_longitude":
-			out.StartLongitude = string(in.String())
-		case "start_latitude":
-			out.StartLatitude = string(in.String())
 		case "stop_longitude":
 			out.StopLongitude = string(in.String())
+		case "tti_id":
+			out.TtiID = int(in.Int())
+		case "tti_name":
+			out.TtiName = string(in.String())
+		case "id":
+			out.ID = int(in.Int())
+		case "start_latitude":
+			out.StartLatitude = string(in.String())
+		case "start_longitude":
+			out.StartLongitude = string(in.String())
 		case "stop_latitude":
 			out.StopLatitude = string(in.String())
 		default:
@@ -65,24 +65,24 @@ func easyjsonC332dce6EncodeTrafficDataProcessingModel(out *jwriter.Writer, in Sh
 	first := true
 	_ = first
 	{
-		const prefix string = ",\"id\":"
+		const prefix string = ",\"stop_longitude\":"
 		out.RawString(prefix[1:])
-		out.Int(int(in.Id))
+		out.String(string(in.StopLongitude))
 	}
 	{
 		const prefix string = ",\"tti_id\":"
 		out.RawString(prefix)
-		out.Int(int(in.TTiId))
+		out.Int(int(in.TtiID))
 	}
 	{
 		const prefix string = ",\"tti_name\":"
 		out.RawString(prefix)
-		out.String(string(in.TTIName))
+		out.String(string(in.TtiName))
 	}
 	{
-		const prefix string = ",\"start_longitude\":"
+		const prefix string = ",\"id\":"
 		out.RawString(prefix)
-		out.String(string(in.StartLongitude))
+		out.Int(int(in.ID))
 	}
 	{
 		const prefix string = ",\"start_latitude\":"
@@ -90,9 +90,9 @@ func easyjsonC332dce6EncodeTrafficDataProcessingModel(out *jwriter.Writer, in Sh
 		out.String(string(in.StartLatitude))
 	}
 	{
-		const prefix string = ",\"stop_longitude\":"
+		const prefix string = ",\"start_longitude\":"
 		out.RawString(prefix)
-		out.String(string(in.StopLongitude))
+		out.String(string(in.StartLongitude))
 	}
 	{
 		const prefix string = ",\"stop_latitude\":"

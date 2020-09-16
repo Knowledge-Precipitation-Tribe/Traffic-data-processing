@@ -1,6 +1,7 @@
 package services
 
 import (
+	"Traffic-data-processing/internal/jsonToMq"
 	"Traffic-data-processing/model"
 	"strings"
 )
@@ -20,11 +21,10 @@ func ParseGeom(road *model.Road) []string {
 	return nil
 }
 
-func GetRoads(road *model.Road) []model.ShortRoad {
+func GetRoads(road *model.Road) {
 	if road == nil || len(road.Roads) == 0 {
-		return nil
+		return
 	}
-	result := make([]model.ShortRoad, 0)
 	for i := 0; i < len(road.Roads); i++ {
 		s := strings.Split(road.Roads[i], ",")
 		for j := len(s) - 1; j > 0; j-- {
@@ -38,8 +38,7 @@ func GetRoads(road *model.Road) []model.ShortRoad {
 				StopLongitude:  stop[0],
 				StopLatitude:   stop[1],
 			}
-			result = append(result, road)
+			go jsonToMq.JsonToMq(road)
 		}
 	}
-	return result
 }
