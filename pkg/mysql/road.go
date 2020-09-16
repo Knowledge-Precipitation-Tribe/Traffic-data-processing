@@ -34,7 +34,7 @@ func InsertRoad(Road *model.Road) error {
 func UpdateRoad(Road *model.Road) error {
 	db := GetDB()
 
-	result := db.Model(Road).Where("tti_id = ?", Road.TTiId).Updates(Road)
+	result := db.Model(Road).Where("tti_id = ?", Road.TtiID).Updates(Road)
 
 	if result.RowsAffected == int64(0) {
 		return errors.New("update error")

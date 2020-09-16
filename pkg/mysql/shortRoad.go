@@ -34,7 +34,7 @@ func InsertShortRoad(shortRoad *model.ShortRoad) error {
 func UpdateShortRoad(shortRoad *model.ShortRoad) error {
 	db := GetDB()
 
-	result := db.Model(shortRoad).Where("tti_id = ?", shortRoad.TTiId).Updates(shortRoad)
+	result := db.Model(shortRoad).Where("tti_id = ?", shortRoad.TtiID).Updates(shortRoad)
 
 	if result.RowsAffected == int64(0) {
 		return errors.New("update error")
