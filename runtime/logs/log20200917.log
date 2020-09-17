@@ -1,0 +1,12 @@
+{"level":"info","time":"2020-09-17T08:52:54.838+0800","linenum":"logging/logger.go:78","msg":"log 初始化成功"}
+{"level":"error","time":"2020-09-17T08:52:54.864+0800","linenum":"mysql/pool.go:29","msg":"conn mysql error","err":"Error 1045: Access denied for user ''@'localhost' (using password: NO)"}
+{"level":"info","time":"2020-09-17T08:53:30.188+0800","linenum":"logging/logger.go:78","msg":"log 初始化成功"}
+{"level":"error","time":"2020-09-17T08:53:30.198+0800","linenum":"mysql/pool.go:29","msg":"conn mysql error","err":"Error 1045: Access denied for user ''@'localhost' (using password: NO)"}
+{"level":"info","time":"2020-09-17T08:54:04.124+0800","linenum":"logging/logger.go:78","msg":"log 初始化成功"}
+{"level":"error","time":"2020-09-17T08:54:04.148+0800","linenum":"mysql/pool.go:29","msg":"conn mysql error","err":"Error 1049: Unknown database 'example'"}
+{"level":"info","time":"2020-09-17T08:54:21.495+0800","linenum":"logging/logger.go:78","msg":"log 初始化成功"}
+{"level":"error","time":"2020-09-17T08:54:21.507+0800","linenum":"services/parseRoad.go:37","msg":"parse tti_id error","error":"strconv.Atoi: parsing \"\": invalid syntax"}
+{"level":"info","time":"2020-09-17T08:56:29.459+0800","linenum":"logging/logger.go:78","msg":"log 初始化成功"}
+{"level":"error","time":"2020-09-17T08:56:29.468+0800","linenum":"services/parseRoad.go:37","msg":"parse tti_id error","error":"strconv.Atoi: parsing \"\": invalid syntax"}
+{"level":"info","time":"2020-09-17T08:57:01.395+0800","linenum":"logging/logger.go:78","msg":"log 初始化成功"}
+{"level":"error","time":"2020-09-17T08:57:01.405+0800","linenum":"services/parseRoad.go:37","msg":"parse tti_id error","error":"strconv.Atoi: parsing \"obj_id\": invalid syntax"}

@@ -11,13 +11,13 @@ import "Traffic-data-processing/model"
 func MarshJson(i interface{}) (string, error) {
 	var result string
 	var err error
-	switch i {
-	case i.(model.ShortRoad):
+	switch i.(type) {
+	case model.ShortRoad:
 		bytes, err := i.(model.ShortRoad).MarshalJSON()
 		if err == nil{
 			result = string(bytes)
 		}
-	case i.(model.Road):
+	case model.Road:
 		bytes, err := i.(model.Road).MarshalJSON()
 		if err == nil{
 			result = string(bytes)

@@ -17,7 +17,7 @@ import (
 var _db *gorm.DB
 var logger = logging.GetLogger()
 
-func init() {
+func InitDB() {
 	//连接MYSQL, 获得DB类型实例，用于后面的数据库读写操作。
 	var err error
 	mysqlURL, err := config.GetMysqlUrl()

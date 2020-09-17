@@ -54,7 +54,7 @@ func NewRabbitMQ(queuqName string,
 }
 
 // 断开channel和connection的连接释放资源
-func (r *RabbitMQ) Destory() {
+func (r *RabbitMQ) Destroy() {
 	r.Channel.Close()
 	r.conn.Close()
 }

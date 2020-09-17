@@ -1,5 +1,7 @@
 package model
 
+import "fmt"
+
 /**
 * @Author: super
 * @Date: 2020-09-16 20:18
@@ -17,4 +19,12 @@ type Road struct {
 // TableName sets the insert table name for this struct type
 func (r *Road) TableName() string {
 	return "roads"
+}
+
+func (road Road) String() string {
+	return fmt.Sprintf("TTIID: %d\n"+
+		"TTINAME: %s\n"+
+		"WktRoad: %s\n",
+		road.TtiID, road.TtiName,
+		road.WktRoad)
 }

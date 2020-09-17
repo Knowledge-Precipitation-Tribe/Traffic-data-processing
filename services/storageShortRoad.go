@@ -23,7 +23,7 @@ func StorageShortRoad(){
 		go SaveShortRoad(d.Body)
 	}
 	wg.Wait()
-	mq.Destory()
+	mq.Destroy()
 }
 
 func SaveShortRoad(bytes []byte){
