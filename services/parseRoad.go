@@ -1,11 +1,11 @@
 package services
 
 import (
+	"Traffic-data-processing/internal/jsonToMq"
 	"Traffic-data-processing/model"
 	"Traffic-data-processing/pkg/logging"
 	"bufio"
 	"encoding/csv"
-	"fmt"
 	"go.uber.org/zap"
 	"io"
 	"os"
@@ -41,7 +41,6 @@ func ReadCSV(path string){
 			TtiName:line[2],
 			WktRoad:line[3],
 		}
-		//go jsonToMq.JsonToMQ(road, ROAD_MQ)
-		fmt.Println(road)
+		go jsonToMq.JsonToMQ(road, ROAD_MQ)
 	}
 }

@@ -32,6 +32,8 @@ func main() {
 	//fmt.Println(roads)
 
 	services.ReadCSV("/Users/super/develop/Traffic-data-processing/data/boundry.csv")
+	services.GetRoad()
+	services.StorageShortRoad()
 }
 
 func ParseGeom(str string) []string {

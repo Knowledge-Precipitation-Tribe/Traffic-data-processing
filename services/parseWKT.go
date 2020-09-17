@@ -1,9 +1,14 @@
 package services
 
 import (
+	"Traffic-data-processing/internal/json"
 	"Traffic-data-processing/internal/jsonToMq"
 	"Traffic-data-processing/model"
+	"Traffic-data-processing/pkg/logging"
+	"Traffic-data-processing/pkg/rabbitmq"
+	"go.uber.org/zap"
 	"strings"
+	"sync"
 )
 
 /**
@@ -12,13 +17,35 @@ import (
 * @Description:
 **/
 
-func ParseGeom(road *model.Road) []string {
+var logger = logging.GetLogger()
+
+func GetRoad(){
+	mq := rabbitmq.NewRabbitMQSimple(ROAD_MQ)
+	messages := mq.GetMsgs()
+	var wg sync.WaitGroup
+	for d := range messages {
+		//将道路信息转换为道路详细信息
+		go RoadToShortRoad(d.Body)
+		//将road信息存储到数据库
+		go SaveRoad(d.Body)
+	}
+	wg.Wait()
+	mq.Destroy()
+}
+
+func RoadToShortRoad(bytes []byte){
+	road, err := json.UnMarshJsonRoad(bytes)
+	logger.Error("UnMarshJsonRoad", zap.Error(err))
+	ParseGeom(road)
+}
+
+func ParseGeom(road *model.Road) {
 	if strings.HasPrefix(road.WktRoad, "MULTILINESTRING") {
 		l := len(road.WktRoad)
 		road.WktRoad = road.WktRoad[17 : l-2]
 		road.Roads = strings.Split(road.WktRoad, "),(")
+		GetRoads(road)
 	}
-	return nil
 }
 
 func GetRoads(road *model.Road) {

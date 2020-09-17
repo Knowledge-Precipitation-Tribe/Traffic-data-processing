@@ -4,9 +4,7 @@ import (
 	"Traffic-data-processing/internal/json"
 	"Traffic-data-processing/pkg/logging"
 	"Traffic-data-processing/pkg/mysql"
-	"Traffic-data-processing/pkg/rabbitmq"
 	"go.uber.org/zap"
-	"sync"
 )
 
 /**
@@ -15,16 +13,16 @@ import (
 * @Description:
 **/
 
-func StorageRoad(){
-	mq := rabbitmq.NewRabbitMQSimple(ROAD_MQ)
-	messages := mq.GetMsgs()
-	var wg sync.WaitGroup
-	for d := range messages {
-		go SaveRoad(d.Body)
-	}
-	wg.Wait()
-	mq.Destroy()
-}
+//func StorageRoad(){
+//	mq := rabbitmq.NewRabbitMQSimple(ROAD_MQ)
+//	messages := mq.GetMsgs()
+//	var wg sync.WaitGroup
+//	for d := range messages {
+//		go SaveRoad(d.Body)
+//	}
+//	wg.Wait()
+//	mq.Destroy()
+//}
 
 func SaveRoad(bytes []byte){
 	shortRoad, err := json.UnMarshJsonRoad(bytes)
