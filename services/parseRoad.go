@@ -10,6 +10,7 @@ import (
 	"io"
 	"os"
 	"strconv"
+	"time"
 )
 
 /**
@@ -42,5 +43,6 @@ func ReadCSV(path string){
 			WktRoad:line[3],
 		}
 		go jsonToMq.MQRoad(road)
+		time.Sleep(1 * time.Second)
 	}
 }

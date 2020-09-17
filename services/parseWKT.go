@@ -9,6 +9,7 @@ import (
 	"go.uber.org/zap"
 	"strings"
 	"sync"
+	"time"
 )
 
 /**
@@ -68,6 +69,7 @@ func GetRoads(road *model.RoadToShort) {
 				StopLatitude:   stop[1],
 			}
 			go jsonToMq.ShortRoad(road)
+			time.Sleep(1 * time.Second)
 		}
 	}
 }
