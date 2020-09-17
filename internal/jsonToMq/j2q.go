@@ -24,6 +24,7 @@ func MQRoad(i interface{}){
 	logger.Info("road", zap.String("detail", s))
 	road := rabbitmq.NewRabbitMQSimple(ROAD_MQ)
 	road.PublishSimple(string(s))
+	road.Destroy()
 }
 
 func ShortRoad(i interface{}){
@@ -35,4 +36,5 @@ func ShortRoad(i interface{}){
 	logger.Info("short road", zap.String("detail", s))
 	shortRoad := rabbitmq.NewRabbitMQSimple(SHORT_MQ)
 	shortRoad.PublishSimple(string(s))
+	shortRoad.Destroy()
 }

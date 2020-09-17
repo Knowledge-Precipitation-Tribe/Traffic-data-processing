@@ -24,8 +24,7 @@ func main() {
 	mysql.InitDB()
 	//jsonToMq.InitMQ()
 
-
-	services.ReadCSV("/Users/super/develop/Traffic-data-processing/data/boundry.csv")
-	services.GetRoad()
-	services.StorageShortRoad()
+	services.ReadCSVDirect("/Users/super/develop/Traffic-data-processing/data/boundry.csv")
+	//services.GetRoad()
+	//services.StorageShortRoad()
 }

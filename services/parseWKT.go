@@ -5,6 +5,7 @@ import (
 	"Traffic-data-processing/internal/jsonToMq"
 	"Traffic-data-processing/model"
 	"Traffic-data-processing/pkg/logging"
+	"Traffic-data-processing/pkg/mysql"
 	"Traffic-data-processing/pkg/rabbitmq"
 	"go.uber.org/zap"
 	"strings"
@@ -47,7 +48,8 @@ func ParseGeom(road *model.Road) {
 		roadToShort := &model.RoadToShort{}
 		roadToShort.Road = road
 		roadToShort.Roads = strings.Split(road.WktRoad, "),(")
-		GetRoads(roadToShort)
+		//GetRoads(roadToShort)
+		GetRoadsDirect(roadToShort)
 	}
 }
 
@@ -70,6 +72,33 @@ func GetRoads(road *model.RoadToShort) {
 			}
 			go jsonToMq.ShortRoad(road)
 			time.Sleep(1 * time.Second)
+		}
+	}
+}
+
+
+func GetRoadsDirect(road *model.RoadToShort) {
+	if road == nil || len(road.Roads) == 0 {
+		return
+	}
+	for i := 0; i < len(road.Roads); i++ {
+		s := strings.Split(road.Roads[i], ",")
+		for j := len(s) - 1; j > 0; j-- {
+			start := strings.Split(s[j], " ")
+			stop := strings.Split(s[j-1], " ")
+			road := &model.ShortRoad{
+				TtiID:          road.Road.TtiID,
+				TtiName:        road.Road.TtiName,
+				StartLongitude: start[0],
+				StartLatitude:  start[1],
+				StopLongitude:  stop[0],
+				StopLatitude:   stop[1],
+			}
+			err := mysql.InsertShortRoad(road)
+			if err != nil{
+				logger.Error("InsertShortRoad", zap.Error(err))
+			}
+			logger.Info("save short road", zap.String("detail", road.String()))
 		}
 	}
 }
