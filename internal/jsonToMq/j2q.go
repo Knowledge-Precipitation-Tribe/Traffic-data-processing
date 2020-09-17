@@ -14,12 +14,12 @@ import (
 **/
 
 
-func JsonToMq(i interface{}){
+func JsonToMQ(i interface{}, mqName string){
 	s, err := json.MarshJson(i)
 	if err != nil{
 		logging.GetLogger().Error("marshJson error", zap.Error(err))
 		return
 	}
-	shortRoad := rabbitmq.NewRabbitMQSimple(SHORT_MQ)
+	shortRoad := rabbitmq.NewRabbitMQSimple(mqName)
 	shortRoad.PublishSimple(string(s))
 }

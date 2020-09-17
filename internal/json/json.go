@@ -25,3 +25,21 @@ func MarshJson(i interface{}) (string, error) {
 	}
 	return result, err
 }
+
+func UnMarshJsonRoad(bytes []byte) (*model.Road, error) {
+	road := &model.Road{}
+	err := road.UnmarshalJSON(bytes)
+	if err != nil{
+		return nil, err
+	}
+	return road, nil
+}
+
+func UnMarshJsonShortRoad(bytes []byte) (*model.ShortRoad, error) {
+	road := &model.ShortRoad{}
+	err := road.UnmarshalJSON(bytes)
+	if err != nil{
+		return nil, err
+	}
+	return road, nil
+}

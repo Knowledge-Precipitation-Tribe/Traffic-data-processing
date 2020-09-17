@@ -38,7 +38,7 @@ func GetRoads(road *model.Road) {
 				StopLongitude:  stop[0],
 				StopLatitude:   stop[1],
 			}
-			go jsonToMq.JsonToMq(road)
+			go jsonToMq.JsonToMQ(road, SHORT_MQ)
 		}
 	}
 }

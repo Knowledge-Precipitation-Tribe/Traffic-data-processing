@@ -7,3 +7,4 @@ package services
 **/
 
 const SHORT_MQ = "shortRoad"
+const ROAD_MQ = "road"
