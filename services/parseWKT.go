@@ -20,7 +20,7 @@ import (
 var logger = logging.GetLogger()
 
 func GetRoad(){
-	mq := rabbitmq.NewRabbitMQSimple(ROAD_MQ)
+	mq := rabbitmq.NewRabbitMQSimple(jsonToMq.ROAD_MQ)
 	messages := mq.GetMsgs()
 	var wg sync.WaitGroup
 	for d := range messages {
@@ -43,12 +43,14 @@ func ParseGeom(road *model.Road) {
 	if strings.HasPrefix(road.WktRoad, "MULTILINESTRING") {
 		l := len(road.WktRoad)
 		road.WktRoad = road.WktRoad[17 : l-2]
-		road.Roads = strings.Split(road.WktRoad, "),(")
-		GetRoads(road)
+		roadToShort := &model.RoadToShort{}
+		roadToShort.Road = road
+		roadToShort.Roads = strings.Split(road.WktRoad, "),(")
+		GetRoads(roadToShort)
 	}
 }
 
-func GetRoads(road *model.Road) {
+func GetRoads(road *model.RoadToShort) {
 	if road == nil || len(road.Roads) == 0 {
 		return
 	}
@@ -58,14 +60,14 @@ func GetRoads(road *model.Road) {
 			start := strings.Split(s[j], " ")
 			stop := strings.Split(s[j-1], " ")
 			road := model.ShortRoad{
-				TtiID:          road.TtiID,
-				TtiName:        road.TtiName,
+				TtiID:          road.Road.TtiID,
+				TtiName:        road.Road.TtiName,
 				StartLongitude: start[0],
 				StartLatitude:  start[1],
 				StopLongitude:  stop[0],
 				StopLatitude:   stop[1],
 			}
-			go jsonToMq.JsonToMQ(road, SHORT_MQ)
+			go jsonToMq.ShortRoad(road)
 		}
 	}
 }

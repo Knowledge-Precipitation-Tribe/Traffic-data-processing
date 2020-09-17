@@ -6,8 +6,8 @@
     "db_name": "urban"
   },
   "rabbitmq": {
-    "user": "root",
-    "password": "root",
-    "host": "127.0.0.1:5124"
+    "user": "guest",
+    "password": "guest",
+    "host": "127.0.0.1:5672"
   }
 }

@@ -41,6 +41,6 @@ func ReadCSV(path string){
 			TtiName:line[2],
 			WktRoad:line[3],
 		}
-		go jsonToMq.JsonToMQ(road, ROAD_MQ)
+		go jsonToMq.MQRoad(road)
 	}
 }

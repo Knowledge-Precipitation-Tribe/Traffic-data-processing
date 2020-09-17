@@ -25,13 +25,14 @@ import (
 //}
 
 func SaveRoad(bytes []byte){
-	shortRoad, err := json.UnMarshJsonRoad(bytes)
+	road, err := json.UnMarshJsonRoad(bytes)
 	if err != nil{
 		logging.GetLogger().Error("UnMarshJsonRoad", zap.Error(err))
 		return
 	}
-	err = mysql.InsertRoad(shortRoad)
+	err = mysql.InsertRoad(road)
 	if err != nil{
 		logging.GetLogger().Error("InsertRoad", zap.Error(err))
 	}
+	logger.Info("save road", zap.String("detail", road.String()))
 }

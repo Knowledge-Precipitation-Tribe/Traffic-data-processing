@@ -13,7 +13,6 @@ type Road struct {
 	TtiID   int    `gorm:"column:tti_id" json:"tti_id"`
 	TtiName string `gorm:"column:tti_name" json:"tti_name"`
 	WktRoad string `gorm:"column:wkt_road" json:"wkt_road"`
-	Roads   []string
 }
 
 // TableName sets the insert table name for this struct type

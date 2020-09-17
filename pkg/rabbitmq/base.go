@@ -62,7 +62,7 @@ func (r *RabbitMQ) Destroy() {
 //自定义错误处理函数
 func (r *RabbitMQ) FailOnErr(err error, message string) {
 	if err != nil {
-		logger.Error(message, zap.Error(err))
+		logging.GetLogger().Error(message, zap.Error(err))
 		panic(fmt.Sprintf("%s:%s", message, err))
 	}
 }
