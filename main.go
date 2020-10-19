@@ -4,7 +4,7 @@ import (
 	"Traffic-data-processing/config"
 	"Traffic-data-processing/pkg/logging"
 	"Traffic-data-processing/pkg/mysql"
-	"Traffic-data-processing/services"
+	"Traffic-data-processing/services/pems"
 	"go.uber.org/zap"
 )
 
@@ -24,7 +24,8 @@ func main() {
 	mysql.InitDB()
 	//jsonToMq.InitMQ()
 
-	services.ReadCSVDirect("/Users/super/develop/Traffic-data-processing/data/boundry.csv")
+	//services.ReadCSVDirect("/Users/super/develop/Traffic-data-processing/data/boundry.csv")
+	pems.ReadFileDirect("/Users/super/develop/Traffic-data-processing/data/pems/metadata.csv")
 	//services.GetRoad()
 	//services.StorageShortRoad()
 }
